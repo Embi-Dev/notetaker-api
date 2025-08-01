@@ -18,7 +18,7 @@ export class NoteService {
 
   async getNotes(
     userId: Types.ObjectId,
-    lastItemId: Types.ObjectId | null,
+    lastItemId: string | null,
   ): Promise<Notes[]> {
     let notes = [];
     const filter: any = {

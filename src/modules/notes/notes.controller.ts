@@ -54,11 +54,14 @@ export class NotesController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('/')
-  async getNotes(@Req() req: RequestObj, @Res() res: Response) {
+  @Get(':lastItemId')
+  async getNotes(
+    @Req() req: RequestObj,
+    @Res() res: Response,
+    @Param('lastItemId') lastItemId: string,
+  ) {
     try {
       const user = req.user as any;
-      const { lastItemId } = req.body;
       const userObj = await this.userService.isExist(user.email);
       if (!userObj) {
         res
